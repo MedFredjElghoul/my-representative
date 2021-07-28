@@ -279,11 +279,12 @@ export class HomeComponent implements OnInit {
 
     ngOnInit() {
         let data
-        let url = "https://theunitedstates.io/congress-legislators/legislators-current.json";
+        // let url = "https://theunitedstates.io/congress-legislators/legislators-current.json";
+        let url = "https://api.propublica.org/congress/v1/117/house/members.json";
         this._http.get(url).subscribe(
             result => {
                 data = result
-                this.data = data; 
+                this.data = data.results[0].members; 
                 console.log(this.data);
             }
         );
@@ -302,7 +303,7 @@ export class HomeComponent implements OnInit {
     search(val) {
         this.result = [];
         for(let i = 0; i<this.data.length; i++) {
-            if (this.data[i].terms[0].state === val) {
+            if (this.data[i].state === val) {
                 this.result.push(this.data[i])
             }
         }

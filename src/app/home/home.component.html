@@ -1,64 +1,76 @@
-<div class="wrapper wrapper-full-page" style="background: white !important">
-  <div class="full-page section-image" style="background: white !important">
-    <div class="content" style="background: white !important">
-      <style>
-        .content-bg {
-    background: white !important;
+<style>
+  .content-bg {
+background: white !important;
 }
 h1{
-    text-align: center  !important;
+text-align: center  !important;
 }
 .col-md-4 .house.link {
-    display: none !important;
+display: none !important;
 }
 
 .col-md-4 .house.link:last-child {
-    display: block !important;
+display: block !important;
 }
 .content {
-    min-height: 90vh !important;
+min-height: 90vh !important;
 } 
-      </style>
+</style>
+<div class="wrapper wrapper-full-page" style="background: white !important">
+  <div class="full-page section-image" style="background: white !important">
+    
+    <div class="content" style="background: white !important">
       <h1>My representative</h1>
       <div class="container" style="background: white !important">
         <select class="form-control" (change)="search($event.target.value)">
           <option *ngFor="let s of states" [value]="s.abr">{{s.name}}</option>
         </select>
         <hr>
-        
+
         <p>Your house representative is:</p>
         <ng-container *ngIf="result">
           <div class="container">
-            <div *ngFor="let r of result; let i = index">
-            
-              <div class="row">
-                <div class="col-md-4">
+            <div *ngFor="let row of result; let i = index">
+              
+              <div class="row  {{row.in_office}}">
+                <div class="col-md-2">
                   <legend style="color: cadetblue; font-size: 20px;">{{i+1}}</legend>
-                </div>
-                <div class="col-md-4">
-                  <label style="font-size: 18px; font-style: oblique; color: red">Full Name:</label> <br>
-                  <label style="font-size: 16px; font-style: oblique">{{r.name.official_full}}</label><br>
-                  <label style="font-size: 18px; font-style: oblique; color: red">Bioguide:</label> <br>
-                  <label style="font-size: 16px; font-style: oblique">{{r.id.bioguide}}</label> <br>
-               </div>
-                <div class="col-md-4">
-                  <div *ngFor="let row of r.terms" class="house link">
-                    <label style="font-size: 18px; font-style: oblique; color: red">Contact:</label> <br>
-                    <a href="{{row.url}}">{{row.url}}</a><br>
-                   
-
-                    <label style="font-size: 18px; font-style: oblique; color: red">District:</label> <br>
-                    <label style="font-size: 16px; font-style: oblique">{{row.district}}</label> <br>
-
-                    <label style="font-size: 18px; font-style: oblique; color: red">State:</label> <br>
-                    <label style="font-size: 16px; font-style: oblique">{{row.state}}</label> <br>
-
-                    <label style="font-size: 18px; font-style: oblique; color: red">Type:</label> <br>
-                    <label style="font-size: 16px; font-style: oblique">{{row.type}}</label> <br>
-                    <hr>
-                    <hr>
-                    <br>
+                 
+                  
                   </div>
+                <div class="col-md-5">
+                  <label style="font-size: 18px; font-style: oblique; color: red">Title:</label> <br>
+                  <label style="font-size: 16px; font-style: oblique">{{row.title}}</label> <br> 
+                  
+                  <label style="font-size: 18px; font-style: oblique; color: red">Full Name:</label> <br>
+                  <label style="font-size: 16px; font-style: oblique">{{row.first_name}} {{row.middle_name}} {{row.last_name}}</label><br>
+                
+                  <label style="font-size: 18px; font-style: oblique; color: red">Party:</label> <br>
+                  <label style="font-size: 16px; font-style: oblique">{{row.party === "R" ? 'Republican' : 'Democratic'}}</label> <br>
+                  
+                  <label style="font-size: 18px; font-style: oblique; color: red">State & District:</label> <br>
+                  <label style="font-size: 16px; font-style: oblique">{{row.state}} ({{row.district}})</label> <br>
+
+
+                </div>
+                <div class="col-md-5">
+                  <label style="font-size: 18px; font-style: oblique; color: red">Phone:</label> <br>
+                  <a href="tel:+1{{row.phone}}">{{row.phone}}</a> <br>
+
+                  <label style="font-size: 18px; font-style: oblique; color: red">Facebook Account:</label> <br>
+                  <a href="http://m.me/{{row.facebook_account}}" target="_blank">Send a Facebook message</a><br>
+                  
+                  <label style="font-size: 18px; font-style: oblique; color: red">Twitter Account:</label> <br>
+                  <a href="https://twitter.com/{{row.twitter_account}" target="_blank">Contact on Twitter</a><br>
+                  
+                 
+                  <label style="font-size: 18px; font-style: oblique; color: red">Url:</label> <br>
+                  <a href="{{row.url}}" target="_blank">Website </a><br>
+                  
+                  
+                  <label style="font-size: 18px; font-style: oblique; color: red">Contact form:</label> <br>
+                  <label style="font-size: 16px; font-style: oblique">{{row.contact_form}}</label> <br>
+                 
                 </div>
               </div>
             </div>

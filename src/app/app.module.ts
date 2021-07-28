@@ -8,13 +8,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent }   from './app.component';
-
-import { SidebarModule } from './sidebar/sidebar.module';
-import { FooterModule } from './shared/footer/footer.module';
-import { NavbarModule} from './shared/navbar/navbar.module';
-import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
-import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
+ 
 import { AppRoutes } from './app.routing';
+import { HeaderInterceptor } from './interceptors/header.interceptor';
 
 @NgModule({
     imports:      [
@@ -26,15 +22,17 @@ import { AppRoutes } from './app.routing';
         }),
         NgbModule,
         HttpModule,
-        HttpClientModule,
-        SidebarModule,
-        NavbarModule,
-        FooterModule
+        HttpClientModule
     ],
     declarations: [
-        AppComponent,
-        AdminLayoutComponent,
-        AuthLayoutComponent,
+        AppComponent
+    ],
+    providers: [
+      {
+        provide: HTTP_INTERCEPTORS,
+        useClass: HeaderInterceptor,
+        multi: true
+      }
     ],
     exports: [],
     bootstrap:    [ AppComponent ]
