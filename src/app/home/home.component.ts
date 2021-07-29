@@ -29,10 +29,6 @@ export class HomeComponent implements OnInit {
             "abr": "AK"
         },
         {
-            "name": "American Samoa",
-            "abr": "AS"
-        },
-        {
             "name": "Arizona",
             "abr": "AZ"
         },
@@ -56,10 +52,6 @@ export class HomeComponent implements OnInit {
             "name": "Delaware",
             "abr": "DE"
         },
-        {
-            "name": "District Of Columbia",
-            "abr": "DC"
-        },
         
         {
             "name": "Florida",
@@ -68,10 +60,6 @@ export class HomeComponent implements OnInit {
         {
             "name": "Georgia",
             "abr": "GA"
-        },
-        {
-            "name": "Guam",
-            "abr": "GU"
         },
         {
             "name": "Hawaii",
@@ -170,10 +158,6 @@ export class HomeComponent implements OnInit {
             "abr": "ND"
         },
         {
-            "name": "Northern Mariana Islands",
-            "abr": "MP"
-        },
-        {
             "name": "Ohio",
             "abr": "OH"
         },
@@ -189,10 +173,6 @@ export class HomeComponent implements OnInit {
         {
             "name": "Pennsylvania",
             "abr": "PA"
-        },
-        {
-            "name": "Puerto Rico",
-            "abr": "PR"
         },
         {
             "name": "Rhode Island",
@@ -221,10 +201,6 @@ export class HomeComponent implements OnInit {
         {
             "name": "Vermont",
             "abr": "VT"
-        },
-        {
-            "name": "Virgin Islands",
-            "abr": "VI"
         },
         {
             "name": "Virginia",
@@ -279,12 +255,12 @@ export class HomeComponent implements OnInit {
 
     ngOnInit() {
         let data
-        // let url = "https://theunitedstates.io/congress-legislators/legislators-current.json";
-        let url = "https://api.propublica.org/congress/v1/117/house/members.json";
+         // let url = "https://api.propublica.org/congress/v1/117/house/members.json";
+        let url = "./assets/us-house.json";
         this._http.get(url).subscribe(
             result => {
                 data = result
-                this.data = data.results[0].members; 
+                this.data = data; 
                 console.log(this.data);
             }
         );
@@ -303,7 +279,7 @@ export class HomeComponent implements OnInit {
     search(val) {
         this.result = [];
         for(let i = 0; i<this.data.length; i++) {
-            if (this.data[i].state === val) {
+            if (this.data[i].state_code === val) {
                 this.result.push(this.data[i])
             }
         }

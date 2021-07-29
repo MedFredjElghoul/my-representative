@@ -15,10 +15,35 @@ display: block !important;
 .content {
 min-height: 90vh !important;
 } 
+.row.info {
+    border-bottom: 3px solid;
+    margin-bottom: 2em;
+}
+.col-md-5.contact-info {
+    display: flex;
+    justify-content: space-evenly;
+}
+a.contact {
+    background: #2e2f2f;
+    height: 40px;
+    color: #fff;
+    text-decoration: none;
+    padding: 9px 1em;
+}
+a.contact:hover{
+  background:#fff;
+  color:#2e2f2f;
+  border: 1px solid;
+}
+i.fa.fa-fw {
+    color: #2e2f2f;
+}
+i.fa.fa-fw:hover {
+    color: red;
+}
 </style>
 <div class="wrapper wrapper-full-page" style="background: white !important">
   <div class="full-page section-image" style="background: white !important">
-    
     <div class="content" style="background: white !important">
       <h1>My representative</h1>
       <div class="container" style="background: white !important">
@@ -29,49 +54,41 @@ min-height: 90vh !important;
 
         <p>Your house representative is:</p>
         <ng-container *ngIf="result">
-          <div class="container">
-            <div *ngFor="let row of result; let i = index">
-              
-              <div class="row  {{row.in_office}}">
+          <div class="container rep">
+            <div *ngFor="let r of result; let i = index">
+             
+              <div class="row info">
                 <div class="col-md-2">
-                  <legend style="color: cadetblue; font-size: 20px;">{{i+1}}</legend>
-                 
-                  
-                  </div>
+                  <img src="{{r.photo_url}}" alt="{{r.photo_url}}"><br>
+                </div>
+
                 <div class="col-md-5">
-                  <label style="font-size: 18px; font-style: oblique; color: red">Title:</label> <br>
-                  <label style="font-size: 16px; font-style: oblique">{{row.title}}</label> <br> 
+                  <label style="font-size: 18px; font-style: oblique; color: red">Full Name: </label>
+                  <label style="font-size: 16px; font-style: oblique">&nbsp;{{r.name}}</label><br>
+
+                  <label style="font-size: 18px; font-style: oblique; color: red">Title: </label> 
+                  <label style="font-size: 16px; font-style: oblique">&nbsp;{{r.title}} | {{r.party}}</label><br>
+
+                  <label style="font-size: 18px; font-style: oblique; color: red">State & District: </label>
+                  <label style="font-size: 16px; font-style: oblique">&nbsp;{{r.state_name}} (District : {{r.district}})</label> <br>
+              
+                  <p style="font-size: 16px; font-style: oblique">{{r.biography}}</p><br>
                   
-                  <label style="font-size: 18px; font-style: oblique; color: red">Full Name:</label> <br>
-                  <label style="font-size: 16px; font-style: oblique">{{row.first_name}} {{row.middle_name}} {{row.last_name}}</label><br>
+
                 
-                  <label style="font-size: 18px; font-style: oblique; color: red">Party:</label> <br>
-                  <label style="font-size: 16px; font-style: oblique">{{row.party === "R" ? 'Republican' : 'Democratic'}}</label> <br>
-                  
-                  <label style="font-size: 18px; font-style: oblique; color: red">State & District:</label> <br>
-                  <label style="font-size: 16px; font-style: oblique">{{row.state}} ({{row.district}})</label> <br>
-
-
                 </div>
-                <div class="col-md-5">
-                  <label style="font-size: 18px; font-style: oblique; color: red">Phone:</label> <br>
-                  <a href="tel:+1{{row.phone}}">{{row.phone}}</a> <br>
-
-                  <label style="font-size: 18px; font-style: oblique; color: red">Facebook Account:</label> <br>
-                  <a href="http://m.me/{{row.facebook_account}}" target="_blank">Send a Facebook message</a><br>
-                  
-                  <label style="font-size: 18px; font-style: oblique; color: red">Twitter Account:</label> <br>
-                  <a href="https://twitter.com/{{row.twitter_account}" target="_blank">Contact on Twitter</a><br>
-                  
-                 
-                  <label style="font-size: 18px; font-style: oblique; color: red">Url:</label> <br>
-                  <a href="{{row.url}}" target="_blank">Website </a><br>
-                  
-                  
-                  <label style="font-size: 18px; font-style: oblique; color: red">Contact form:</label> <br>
-                  <label style="font-size: 16px; font-style: oblique">{{row.contact_form}}</label> <br>
-                 
+                <div class="col-md-5 contact-info">
+                  <a href="tel:+1{{r.phone}}"><i class="fa fa-fw fa-phone"> </i></a>
+                  <a href="{{r.facebook_url}}" target="_blank"><i class="fa fa-fw fa-facebook"> </i></a>
+                  <a href="{{r.twitter_url}}" target="_blank"><i class="fa fa-fw fa-twitter"> </i></a>
+                  <a href="{{r.website}}" target="_blank"><i class="fa fa-fw fa-globe"> </i> </a>
+                  <a href="{{r.contact_page}}" target="_blank" class="contact">Contact page </a>
                 </div>
+               
+
+
+
+
               </div>
             </div>
           </div>
